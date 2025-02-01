@@ -7,7 +7,7 @@ use App\Repository\PlatRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
-#[ApiResource]
+//#[ApiResource]
 class Plat
 {
     #[ORM\Id]
@@ -17,6 +17,10 @@ class Plat
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
+
+    #[ORM\OneToOne(inversedBy: 'plat', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?recette $recette = null;
 
     public function getId(): ?int
     {
@@ -31,6 +35,18 @@ class Plat
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getRecette(): ?recette
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(recette $recette): static
+    {
+        $this->recette = $recette;
 
         return $this;
     }

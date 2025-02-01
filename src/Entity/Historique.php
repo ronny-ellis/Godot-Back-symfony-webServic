@@ -7,7 +7,7 @@ use App\Repository\HistoriqueRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HistoriqueRepository::class)]
-#[ApiResource]
+//#[ApiResource]
 class Historique
 {
     #[ORM\Id]
