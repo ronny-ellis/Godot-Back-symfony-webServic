@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[ApiResource]
+//#[ApiResource]
 class Ingredient
 {
     #[ORM\Id]
@@ -18,7 +18,7 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['ingredients.create'],['ingredients.show'])]
+    #[Groups(['ingredients.create','ingredients.show'])]
     private ?string $nom = null;
 
     public function getId(): ?int

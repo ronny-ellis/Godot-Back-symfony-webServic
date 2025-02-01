@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
+//#[ApiResource]
 class User
 {
     #[ORM\Id]
@@ -18,15 +18,15 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['users.show'],['users.create'])]
+    #[Groups(['users.show','users.create'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['users.show'],['users.create'])]
+    #[Groups(['users.show','users.create'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['users.show'],['users.create'])]
+    #[Groups(['users.show','users.create'])]
     private ?string $mdp = null;
 
     public function getId(): ?int

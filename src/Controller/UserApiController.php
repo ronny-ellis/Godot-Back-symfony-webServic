@@ -19,6 +19,7 @@ final class UserApiController extends AbstractController{
     ])] User $user){
         $em->persist($user);
         $em->flush();
+
         return $this->json($user,200,[],[
             'groups'=>['users.show']
         ]);
