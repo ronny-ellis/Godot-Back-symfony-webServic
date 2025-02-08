@@ -12,11 +12,11 @@ class Ingredient
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['ingredients.show'])]
+    #[Groups(['ingredients.show','recettes.create','recettes.show','plats.show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['ingredients.show','ingredients.create'])]
+    #[Groups(['ingredients.show','ingredients.create','recettes.show','plats.show'])]
     private ?string $nom = null;
 
     public function getId(): ?int
