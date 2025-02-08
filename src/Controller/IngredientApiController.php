@@ -33,7 +33,7 @@ final class IngredientApiController extends AbstractController{
             'groups'=>['ingredients.show']
         ]);
     }
-    
+
     #[Route('/api/ingredients/{id}',requirements:['id'=>Requirement::DIGITS], methods:"GET")]
     public function finById(Ingredient $ingredient)
     {
