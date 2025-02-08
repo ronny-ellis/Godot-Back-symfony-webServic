@@ -45,7 +45,7 @@ APIResource:
     PlatApiLink:
         Method POST:
             link:
-                {link}/api/plats
+                https://godot-back-symfony-webservic-production.up.railway.app/api/plats
             json:
                 {
                      "nom":"Fondu au fromage",
@@ -55,8 +55,8 @@ APIResource:
                 }
         Method GET:
             link:
-                {link}/api/plats
-                {link}/api/{id}
+                https://godot-back-symfony-webservic-production.up.railway.app/api/plats
+                https://godot-back-symfony-webservic-production.up.railway.app/api/{id}
 
     RecetteApi:
         Method POST:
@@ -72,17 +72,17 @@ APIResource:
                 }
         Method GET:
             link:
-                {link}/api/recettes
-                {link}/api/recettes/{id}
+                https://godot-back-symfony-webservic-production.up.railway.app/api/recettes
+                https://godot-back-symfony-webservic-production.up.railway.app/api/recettes/{id}
     IngredientApi:
         Method POST:
             link:
-                {link}/api/ingredients
+                https://godot-back-symfony-webservic-production.up.railway.app/api/ingredients
             json:
                 {
                     "nom":"Tomate"
                 }               
         Method GET:
             link:
-                {link}/api/ingredients
-                {link}/api/ingredients/{id}
+                https://godot-back-symfony-webservic-production.up.railway.app/api/ingredients
+                https://godot-back-symfony-webservic-production.up.railway.app/api/ingredients/{id}
