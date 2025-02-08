@@ -15,13 +15,10 @@ class Recette
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(mappedBy: 'recette', cascade: ['persist', 'remove'])]
-    private ?Plat $plat = null;
-
     /**
-     * @var Collection<int, ingredient>
+     * @var Collection<int, Ingredient>
      */
-    #[ORM\ManyToMany(targetEntity: ingredient::class, inversedBy: 'recettes')]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class)]
     private Collection $ingredients;
 
     public function __construct()
@@ -34,32 +31,15 @@ class Recette
         return $this->id;
     }
 
-    public function getPlat(): ?Plat
-    {
-        return $this->plat;
-    }
-
-    public function setPlat(Plat $plat): static
-    {
-        // set the owning side of the relation if necessary
-        if ($plat->getRecette() !== $this) {
-            $plat->setRecette($this);
-        }
-
-        $this->plat = $plat;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, ingredient>
+     * @return Collection<int, Ingredient>
      */
     public function getIngredients(): Collection
     {
         return $this->ingredients;
     }
 
-    public function addIngredient(ingredient $ingredient): static
+    public function addIngredient(Ingredient $ingredient): static
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients->add($ingredient);
@@ -68,7 +48,7 @@ class Recette
         return $this;
     }
 
-    public function removeIngredient(ingredient $ingredient): static
+    public function removeIngredient(Ingredient $ingredient): static
     {
         $this->ingredients->removeElement($ingredient);
 
