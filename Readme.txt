@@ -41,3 +41,48 @@ Controller:
             getReservation(idPlat);
             getReservation(idClient);
     
+Api:
+    PlatApiLink:
+        Method POST:
+            link:
+                {link}/api/plats
+            json:
+                {
+                     "nom":"Fondu au fromage",
+		             "recette":{
+				        "id":1
+		             }
+                }
+        Method GET:
+            link:
+                {link}/api/plats
+                {link}/api/{id}
+
+    RecetteApi:
+        Method POST:
+            link:
+                {link}/api/recettes
+            json:
+                {
+	                "ingredients":[
+		                {"id":1},
+		                {"id":2},
+		                {"id":3}
+	                ]
+                }
+        Method GET:
+            link:
+                {link}/api/recettes
+                {link}/api/recettes/{id}
+    IngredientApi:
+        Method POST:
+            link:
+                {link}/api/ingredients
+            json:
+                {
+                    "nom":"Tomate"
+                }               
+        Method GET:
+            link:
+                {link}/api/ingredients
+                {link}/api/ingredients/{id}
