@@ -41,7 +41,7 @@ Controller:
             getReservation(idPlat);
             getReservation(idClient);
     
-Api:
+APIResource:
     PlatApiLink:
         Method POST:
             link:
