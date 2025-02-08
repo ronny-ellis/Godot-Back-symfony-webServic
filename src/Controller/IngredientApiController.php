@@ -35,8 +35,7 @@ final class IngredientApiController extends AbstractController{
     }
 
     #[Route('/api/ingredients/{id}',requirements:['id'=>Requirement::DIGITS], methods:"GET")]
-    public function finById(Ingredient $ingredient)
-    {
+    public function finById(Ingredient $ingredient){
         return $this->json($ingredient,200,[],[
             'groups'=>['ingredients.show']
         ]);
