@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Ingredient;
 use App\Entity\Plat;
+use App\Entity\Recette;
+use App\Repository\IngredientRepository;
 use App\Repository\PlatRepository;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,22 +19,28 @@ use Symfony\Component\Routing\Requirement\Requirement;
 
 final class PlatApiController extends AbstractController{
     #[Route('/api/plats',methods:"POST")]
-    public function create(EntityManagerInterface $em,Request $request,RecetteRepository $repository){
+    public function create(EntityManagerInterface $em,Request $request,IngredientRepository $repository){
         $plat = new Plat();
-        $recetteData = json_decode($request->getContent(), true);
-        if (!isset($recetteData['recette']['id'])) {
-            return new JsonResponse(["error" => "Recette ID is missing"], JsonResponse::HTTP_BAD_REQUEST);
+        $recette = new Recette();
+        $ingredientData = json_decode($request->getContent(), true);
+        
+        if (!isset($ingredientData['ingredients']) || !is_array($ingredientData['ingredients'])) {
+            return new JsonResponse(["error" => "Invalid ingredient data"], JsonResponse::HTTP_BAD_REQUEST);
         }
-        $recette = $repository->find($recetteData['recette']['id']);
-        if (!$recette) {
-            return new JsonResponse(["error" => "Recette with ID " . $recetteData['recette']['id'] . " not found"], JsonResponse::HTTP_NOT_FOUND);
+        foreach ($ingredientData['ingredients'] as $data) {
+            $ingredient = $repository->find($data["id"]); 
+            
+            if ($ingredient) {
+                $recette->addIngredient($ingredient);
+            } else {
+                return new JsonResponse(["error" => "Ingredient with ID " . $data["id"] . " not found"], JsonResponse::HTTP_NOT_FOUND);
+            }
         }
         $plat->setRecette($recette);
-        $plat->setNom($recetteData['nom']);
+        $plat->setNom($ingredientData['nom']);
 
         $em->persist($plat);
         $em->flush();
-        
         return $this->json($plat,200,[],[
             'groups'=>['plats.show']
         ]);

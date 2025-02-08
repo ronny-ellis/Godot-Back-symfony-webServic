@@ -48,11 +48,14 @@ APIResource:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/plats
             json:
                 {
-                     "nom":"Fondu au fromage",
-		             "recette":{
-				        "id":1
-		             }
+	                "nom":"Soupe Tomate",
+	                "ingredients":[
+		                {"id":1},
+		                {"id":2},
+		                {"id":3}
+		            ]	
                 }
+
         Method GET:
             link:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/plats
