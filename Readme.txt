@@ -89,3 +89,25 @@ APIResource:
             link:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/ingredients
                 https://godot-back-symfony-webservic-production.up.railway.app/api/ingredients/{id}
+    CommandeApi
+        Method POST:
+            link:
+                https://godot-back-symfony-webservic-production.up.railway.app/api/commandes
+            json:
+                {
+	                "idUser":"1",
+	                "plat":
+	                [
+		                {
+			                "id":1
+		                }
+	                ],
+	                "estRecu":false
+                }
+        Method GET:
+            link:
+                https://godot-back-symfony-webservic-production.up.railway.app/api/commandes
+                https://godot-back-symfony-webservic-production.up.railway.app/api/commandes/{id}
+        Method PUT:
+            link:
+                https://godot-back-symfony-webservic-production.up.railway.app/api/commandes/validation/{id}
