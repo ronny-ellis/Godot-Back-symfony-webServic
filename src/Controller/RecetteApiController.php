@@ -69,6 +69,6 @@ final class RecetteApiController extends AbstractController{
 
     #[Route('/api/recettes/{id}', requirements:['id'=>Requirement::DIGITS], methods:"PUT")]
     public function update(){
-               
+        
     }
 }

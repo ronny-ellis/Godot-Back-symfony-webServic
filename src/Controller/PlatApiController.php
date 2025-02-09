@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\Validator\Constraints\Time;
 
 final class PlatApiController extends AbstractController{
     #[Route('/api/plats',methods:"POST")]
@@ -39,13 +40,15 @@ final class PlatApiController extends AbstractController{
                 return new JsonResponse(["error" => "Ingredient with ID " . $data["id"] . " not found"], JsonResponse::HTTP_NOT_FOUND);
             }
         }
+        $plat->setPrix($ingredientData['prix']);
+        $plat->setTempsDeCuisson(new \DateTime($ingredientData['tempsDeCuisson']));
         $plat->setRecette($recette);
         $plat->setNom($ingredientData['nom']);
 
         $historique->setVariableType("Plat,recette");
         $historique->setDateAjout(new DateTimeImmutable());
         $historique->setDateUpdate(new DateTimeImmutable());
-        
+
         $em->persist($plat);
         $em->persist($historique);
         $em->flush();

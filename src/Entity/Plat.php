@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -30,6 +31,14 @@ class Plat
      */
     #[ORM\ManyToMany(targetEntity: Commande::class, mappedBy: 'plat')]
     private Collection $commandes;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 0, nullable: true)]
+    #[Groups(['plats.show','plats.create','commandes.show'])]
+    private ?string $prix = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    #[Groups(['plats.show','plats.create','commandes.show'])]
+    private ?\DateTimeInterface $tempsDeCuisson = null;
 
     public function __construct()
     {
@@ -88,6 +97,30 @@ class Plat
         if ($this->commandes->removeElement($commande)) {
             $commande->removePlat($this);
         }
+
+        return $this;
+    }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?string $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getTempsDeCuisson(): ?\DateTimeInterface
+    {
+        return $this->tempsDeCuisson;
+    }
+
+    public function setTempsDeCuisson(?\DateTimeInterface $tempsDeCuisson): static
+    {
+        $this->tempsDeCuisson = $tempsDeCuisson;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Historique;
 use App\Entity\Ingredient;
+use App\Entity\Stock;
 use App\Repository\IngredientRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,6 @@ final class IngredientApiController extends AbstractController{
         'groups'=>['ingredients.create']
     ])] Ingredient $ingredient){
         $historique=new Historique();
-        
         $historique->setVariableType("ingredient");
         $historique->setDateAjout(new DateTimeImmutable());
         $historique->setDateUpdate(new DateTimeImmutable());
