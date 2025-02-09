@@ -14,14 +14,14 @@ class Recette
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recettes.show','plats.show','plats.create'])]
+    #[Groups(['recettes.show','plats.show','plats.create','commandes.show'])]
     private ?int $id = null;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class)]
-    #[Groups(['recettes.create','recettes.show','plats.show'])]
+    #[Groups(['recettes.create','recettes.show','plats.show','commandes.show'])]
     private Collection $ingredients;
 
     #[ORM\OneToOne(mappedBy: 'Recette', cascade: ['persist', 'remove'])]

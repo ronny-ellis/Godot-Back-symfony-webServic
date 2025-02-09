@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Historique;
 use App\Entity\Ingredient;
 use App\Entity\Recette;
 use App\Repository\IngredientRepository;
 use App\Repository\RecetteRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,6 +21,7 @@ final class RecetteApiController extends AbstractController{
     #[Route('/api/recettes', methods:"POST")]
     public function create(EntityManagerInterface $em,Request $request,IngredientRepository $repository){
         $recette = new Recette();
+        $historique=new Historique();
         $ingredientData = json_decode($request->getContent(), true);
         
         if (!isset($ingredientData['ingredients']) || !is_array($ingredientData['ingredients'])) {
@@ -33,7 +36,13 @@ final class RecetteApiController extends AbstractController{
                 return new JsonResponse(["error" => "Ingredient with ID " . $data["id"] . " not found"], JsonResponse::HTTP_NOT_FOUND);
             }
         }
+
+        $historique->setVariableType("recette");
+        $historique->setDateAjout(new DateTimeImmutable());
+        $historique->setDateUpdate(new DateTimeImmutable());
+        
         $em->persist($recette);
+        $em->persist($historique);
         $em->flush();
 
         return $this->json($recette,200,[],[
@@ -56,5 +65,10 @@ final class RecetteApiController extends AbstractController{
         return $this->json($recette,200,[],[
             'groups'=>['recettes.show']
         ]);
+    }
+
+    #[Route('/api/recettes/{id}', requirements:['id'=>Requirement::DIGITS], methods:"PUT")]
+    public function update(){
+               
     }
 }

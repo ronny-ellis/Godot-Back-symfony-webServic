@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Historique;
 use App\Entity\Ingredient;
 use App\Entity\Plat;
 use App\Entity\Recette;
 use App\Repository\IngredientRepository;
 use App\Repository\PlatRepository;
 use App\Repository\RecetteRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,6 +24,7 @@ final class PlatApiController extends AbstractController{
     public function create(EntityManagerInterface $em,Request $request,IngredientRepository $repository){
         $plat = new Plat();
         $recette = new Recette();
+        $historique=new Historique();
         $ingredientData = json_decode($request->getContent(), true);
         
         if (!isset($ingredientData['ingredients']) || !is_array($ingredientData['ingredients'])) {
@@ -39,7 +42,12 @@ final class PlatApiController extends AbstractController{
         $plat->setRecette($recette);
         $plat->setNom($ingredientData['nom']);
 
+        $historique->setVariableType("Plat,recette");
+        $historique->setDateAjout(new DateTimeImmutable());
+        $historique->setDateUpdate(new DateTimeImmutable());
+        
         $em->persist($plat);
+        $em->persist($historique);
         $em->flush();
         return $this->json($plat,200,[],[
             'groups'=>['plats.show']

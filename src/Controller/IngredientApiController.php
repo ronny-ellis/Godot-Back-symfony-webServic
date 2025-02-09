@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Historique;
 use App\Entity\Ingredient;
 use App\Repository\IngredientRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +18,16 @@ final class IngredientApiController extends AbstractController{
     public function create(EntityManagerInterface $em,#[MapRequestPayload(serializationContext:[
         'groups'=>['ingredients.create']
     ])] Ingredient $ingredient){
+        $historique=new Historique();
+        
+        $historique->setVariableType("ingredient");
+        $historique->setDateAjout(new DateTimeImmutable());
+        $historique->setDateUpdate(new DateTimeImmutable());
 
         $em->persist($ingredient);
+        $em->persist($historique);
         $em->flush();
-
+    
         return $this->json($ingredient,200,[],[
             'groups'=>['ingredients.show']
         ]);
