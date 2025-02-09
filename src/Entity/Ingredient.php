@@ -12,7 +12,7 @@ class Ingredient
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['ingredients.show','recettes.create','recettes.show','plats.show','commandes.show','stocks.shows'])]
+    #[Groups(['ingredients.show','recettes.create','recettes.show','plats.show','commandes.show','stocks.show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
