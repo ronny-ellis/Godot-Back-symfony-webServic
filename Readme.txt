@@ -11,7 +11,7 @@ Controller:
             findAll();
             findById(id);
         Method POST:
-            create(nom,idPlat,idRecette);
+            create();
     PlatApi:
         Method GET:
             findAll();
@@ -24,23 +24,21 @@ Controller:
             findById(id);
         Method POST:
             create(nom)
-    HistoriqueApi():
+    HistoriqueApi:
         Method POST:
-            createHistorique(id,idPlat,desc,refClient,dateTime);
+            create();
         Method GET:
-            getHistorique();
-            getHistoriqueById(id);
-            getHistoriqueByPlat(idPlat);
-            getHistoriqueByRefClient(idClient);
-    commandeControllerApi:
+            findAll()
+            findById(id)
+    commandeApi:
         Method POST:
             create();
         Method GET:
             findAll();
             findById(id);
         Method put:
-            validation();
-            estTerminer();
+            validation(id);
+            estTerminer(id);
     
 APIResource:
     PlatApiLink:
