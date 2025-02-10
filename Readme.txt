@@ -117,3 +117,4 @@ APIResource:
         Method PUT:
             link:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/commandes/validation/{id}
+                https://godot-back-symfony-webservic-production.up.railway.app/api/commandes/estTerminer/{id}

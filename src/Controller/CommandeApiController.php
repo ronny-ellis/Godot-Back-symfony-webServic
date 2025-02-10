@@ -77,4 +77,16 @@ final class CommandeApiController extends AbstractController{
             'groups'=>['commandes.show']
         ]);
     }
+    #[Route('/api/commandes/estTerminer/{id}',requirements:['id'=>Requirement::DIGITS], methods:"PUT")]
+    public function estTerminer(Commande $commande,EntityManagerInterface $em){
+        $commande->setEstTermine(true);
+        $commande->setDateUpdate(new DateTimeImmutable());
+
+        $em->persist($commande);
+        $em->flush();
+
+        return $this->json($commande,200,[],[
+            'groups'=>['commandes.show']
+        ]);
+    }
 }
