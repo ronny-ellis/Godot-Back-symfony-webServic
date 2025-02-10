@@ -37,6 +37,14 @@ class Commande
     #[Groups(['commandes.show'])]
     private ?\DateTimeInterface $dateUpdate = null;
 
+    #[ORM\Column]
+    #[Groups(['commandes.show'],['commandes.creates'])]
+    private ?int $quantite = null;
+
+    #[ORM\Column]
+    #[Groups(['commandes.show'],['commandes.creates'])]
+    private ?bool $estTermine = null;
+
     public function __construct()
     {
         $this->plat = new ArrayCollection();
@@ -103,6 +111,30 @@ class Commande
     public function setDateUpdate(\DateTimeInterface $dateUpdate): static
     {
         $this->dateUpdate = $dateUpdate;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): static
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function isEstTermine(): ?bool
+    {
+        return $this->estTermine;
+    }
+
+    public function setEstTermine(bool $estTermine): static
+    {
+        $this->estTermine = $estTermine;
 
         return $this;
     }

@@ -33,9 +33,14 @@ final class CommandeApiController extends AbstractController{
                 return new JsonResponse(["error" => "plat with ID " . $data["id"] . " not found"], JsonResponse::HTTP_NOT_FOUND);
             }
         }
+
         $commande->setIdUser($platData['idUser']);
         $commande->setEstRecu($platData['estRecu']);
+        $commande->setQuantite($platData['quantite']);
+        $commande->setEstTermine($platData['estTermine']);
         $commande->setDateUpdate(new DateTimeImmutable());
+
+        //dd($commande);
 
         $em->persist($commande);
         $em->flush();

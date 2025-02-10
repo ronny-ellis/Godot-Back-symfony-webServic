@@ -48,12 +48,17 @@ APIResource:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/plats
             json:
                 {
-	                "nom":"Soupe Tomate",
-	                "ingredients":[
-		                {"id":1},
-		                {"id":2},
-		                {"id":3}
-		            ]	
+	                "nom":"Soupe A",
+			        "ingredients":[
+				        {
+					        "id":1
+				        },
+				        {
+					        "id":2
+				        }
+			        ],
+	                "prix":2000,
+	                "tempsDeCuisson":"00:03:00"
                 }
 
         Method GET:
@@ -94,15 +99,16 @@ APIResource:
             link:
                 https://godot-back-symfony-webservic-production.up.railway.app/api/commandes
             json:
-                {
-	                "idUser":"1",
+                { "idUser":"1",
 	                "plat":
 	                [
 		                {
 			                "id":1
 		                }
 	                ],
-	                "estRecu":false
+	                "estRecu":false,
+                    "estTermine":false,
+                    "quantite":10
                 }
         Method GET:
             link:
