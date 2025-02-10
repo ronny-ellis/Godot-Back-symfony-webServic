@@ -1,29 +1,29 @@
 Entity:
-    Plat(id,nom);
-    Recette(id,idPlat,idIngredient);
+    Plat(id,nom,Recette,duree);
+    Recette(id,Plat,<collection> Ingredient);
     Ingredient(id,nom);
-    Historique(id,idPlat,Achat dateTime);
-    Reservation(id,idPlat,idClient,Achat dateTime);
+    Historique(id,TypeVariable,dateUpdate dateTime);
+    Commande(id,Plat,estRecu,estTermine)
 
 Controller:
     RecetteApi:
         Method GET
-            getRecette();
-            getRecetteById(id);
+            findAll();
+            findById(id);
         Method POST:
-            createRecette(nom,idPlat,idRecette);
+            create(nom,idPlat,idRecette);
     PlatApi:
         Method GET:
-            getPlat();
-            getPlatById(Id);
+            findAll();
+            findById(Id);
         Method POST:
-            createPlat(nom);
+            create(nom);
     IngredientApi:
         Method GET:
-            getIngredient();
-            getIngredientById(id);
+            findAll();
+            findById(id);
         Method POST:
-            createIngredient(nom)
+            create(nom)
     HistoriqueApi():
         Method POST:
             createHistorique(id,idPlat,desc,refClient,dateTime);
@@ -32,14 +32,15 @@ Controller:
             getHistoriqueById(id);
             getHistoriqueByPlat(idPlat);
             getHistoriqueByRefClient(idClient);
-    ReservationControllerApi:
+    commandeControllerApi:
         Method POST:
-            createReservation();
+            create();
         Method GET:
-            getReservation();
-            getReservationById(id);
-            getReservation(idPlat);
-            getReservation(idClient);
+            findAll();
+            findById(id);
+        Method put:
+            validation();
+            estTerminer();
     
 APIResource:
     PlatApiLink:
