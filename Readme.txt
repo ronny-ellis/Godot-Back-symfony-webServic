@@ -7,7 +7,7 @@ Entity:
 
 Controller:
     RecetteApi:
-        Method GET
+        Method GET:
             findAll();
             findById(id);
         Method POST:
