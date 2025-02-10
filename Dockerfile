@@ -30,6 +30,7 @@ RUN composer require symfony/serializer
 
 RUN composer require api
 
+RUN composer require nelmio/cors-bundle 
 
 # Set the port Symfony will use
 ENV PORT=8000

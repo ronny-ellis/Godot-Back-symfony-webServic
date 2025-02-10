@@ -3,7 +3,7 @@ Entity:
     Recette(id,Plat,<collection> Ingredient);
     Ingredient(id,nom);
     Historique(id,TypeVariable,dateUpdate dateTime);
-    Commande(id,idUser,<collection> Plat,estRecu,estTermine)
+    Commande(id,idUser,<collection> Plat,quantite,estRecu,estTermine)
 
 Controller:
     RecetteApi:
